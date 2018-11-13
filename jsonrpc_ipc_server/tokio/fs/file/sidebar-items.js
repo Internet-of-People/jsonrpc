@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["CreateFuture","Future returned by `File::create` and resolves to a `File` instance."],["MetadataFuture","Future returned by `File::metadata` and resolves to a `(File, Metadata)` instance."],["OpenFuture","Future returned by `File::open` and resolves to a `File` instance."],["SeekFuture","Future returned by `File::seek`."]]});

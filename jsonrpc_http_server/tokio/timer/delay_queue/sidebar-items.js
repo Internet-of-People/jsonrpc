@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Expired","An entry in `DelayQueue` that has expired and removed."],["Key","Token to a value stored in a `DelayQueue`."]]});
