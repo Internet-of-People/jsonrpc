@@ -198,7 +198,7 @@ impl<T: Metadata, S: Middleware<T>> MetaIoHandler<T, S> {
 			res
 		}
 
-		trace!(target: "rpc", "Request: {}.", request);
+		debug!(target: "rpc", "Request: {}.", request);
 		let request = read_request(request);
 		let result = match request {
 			Err(error) => A(futures::finished(Some(Response::from(error, self.compatibility.default_version())))),
