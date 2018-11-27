@@ -39,7 +39,7 @@ pub mod middleware;
 pub mod types;
 
 /// A `Future` trait object.
-pub type BoxFuture<T> = Box<futures::Future<Item = T, Error = Error> + Send>;
+pub type BoxFuture<T> = Box<futures::Future<Item = T, Error = Error>>;
 
 /// A Result type.
 pub type Result<T> = ::std::result::Result<T, Error>;
