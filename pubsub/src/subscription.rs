@@ -15,9 +15,9 @@ use types::{PubSubMetadata, SubscriptionId, TransportSender, TransportError, Sin
 /// RPC client session
 /// Keeps track of active subscriptions and unsubscribes from them upon dropping.
 pub struct Session {
-	active_subscriptions: Mutex<HashMap<(SubscriptionId, String), Box<Fn(SubscriptionId) + Send + 'static>>>,
+	active_subscriptions: Mutex<HashMap<(SubscriptionId, String), Box<Fn(SubscriptionId) + 'static>>>,
 	transport: TransportSender,
-	on_drop: Mutex<Vec<Box<FnMut() + Send>>>,
+	on_drop: Mutex<Vec<Box<FnMut()>>>,
 }
 
 impl fmt::Debug for Session {
@@ -46,7 +46,7 @@ impl Session {
 	}
 
 	/// Adds a function to call when session is dropped.
-	pub fn on_drop<F: FnOnce() + Send + 'static>(&self, on_drop: F) {
+	pub fn on_drop<F: FnOnce() + 'static>(&self, on_drop: F) {
 		let mut func = Some(on_drop);
 		self.on_drop.lock().push(Box::new(move || {
 			if let Some(f) = func.take() {
@@ -57,7 +57,7 @@ impl Session {
 
 	/// Adds new active subscription
 	fn add_subscription<F>(&self, name: &str, id: &SubscriptionId, remove: F) where
-		F: Fn(SubscriptionId) + Send + 'static,
+		F: Fn(SubscriptionId) + 'static,
 	{
 		let ret = self.active_subscriptions.lock().insert((id.clone(), name.into()), Box::new(remove));
 		if let Some(remove) = ret {

@@ -479,16 +479,16 @@ mod tests {
 		assert_eq!(called.load(atomic::Ordering::SeqCst), true);
 	}
 
-	#[test]
-	fn test_send_sync() {
-		fn is_send_sync<T>(_obj: T) -> bool where
-			T: Send + Sync
-		{
-			true
-		}
-
-		let io = IoHandler::new();
-
-		assert!(is_send_sync(io))
-	}
+//	#[test]
+//	fn test_send_sync() {
+//		fn is_send_sync<T>(_obj: T) -> bool where
+//			T: Send + Sync
+//		{
+//			true
+//		}
+//
+//		let io = IoHandler::new();
+//
+//		assert!(is_send_sync(io))
+//	}
 }
