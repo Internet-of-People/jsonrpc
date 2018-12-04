@@ -30,6 +30,11 @@ impl<T: PubSubMetadata> PubSubMetadata for Option<T> {
 	}
 }
 
+impl<T: PubSubMetadata> PubSubMetadata for Arc<T> {
+	fn session(&self) -> Option<Arc<Session>> { (**self).session() }
+}
+
+
 /// Unique subscription id.
 /// NOTE Assigning same id to different requests will cause the previous request to be unsubscribed.
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
