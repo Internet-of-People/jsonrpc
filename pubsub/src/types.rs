@@ -30,9 +30,6 @@ impl<T: PubSubMetadata> PubSubMetadata for Option<T> {
 	}
 }
 
-impl<T: PubSubMetadata> PubSubMetadata for Arc<T> {
-	fn session(&self) -> Option<Arc<Session>> { (**self).session() }
-}
 
 
 /// Unique subscription id.
